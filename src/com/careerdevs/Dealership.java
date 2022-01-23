@@ -49,17 +49,23 @@ public class Dealership {
         }
     }
 
-    public String bookCar(String carMake){
-        for (int i = 0; i < getCurrentCarsAvailable().size(); i++) {
-            if(getCurrentCarsAvailable().get(i).getMake().equals(carMake)) {
-                getCurrentCarsBooked().add(getCurrentCarsAvailable().get(i));
-                getCurrentCarsAvailable().remove(i);
+    public String reserveCar(String carMake){
+        for (int i = 0; i < currentCarsAvailable.size(); i++) {
+            if(currentCarsAvailable.get(i).getMake().equals(carMake)) {
+                currentCarsBooked.add(currentCarsAvailable.get(i));
+                currentCarsAvailable.remove(i);
             }
-
         }
         return carMake;
-//        System.out.println("booked " + getCurrentCarsBooked().toString());
-//        System.out.println("available " + getCurrentCarsAvailable().toString());
     }
 
+    public String returnCar(String carMake) {
+        for (int i = 0; i < currentCarsBooked.size(); i++) {
+            if(currentCarsBooked.get(i).getMake().equals(carMake)) {
+                currentCarsAvailable.add(currentCarsBooked.get(i));
+                currentCarsBooked.remove(i);
+            }
+        }
+        return carMake;
+    }
 }
