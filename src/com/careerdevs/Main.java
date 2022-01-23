@@ -22,10 +22,11 @@ public class Main {
         carDealerWendy.getCurrentCarsAvailable().add(car3);
 
         // call the displayInventory method
-        carDealerWendy.displayInventory();
+        //carDealerWendy.displayInventory();
 
-        System.out.println("\r\n ====== Welcome to Car Dealer Wendy ========");
-        System.out.println("Enter (1) to book a car, (2) to return a car, or (3) to exit the dealership");
+        System.out.println("\r\n ====== Welcome to Car Dealer Wendy ======== \r\n");
+        System.out.println("Enter: \n (1) to book a car \n (2) to return a car \n (3) to exit the dealership");
+
 
         int custInput = scanner.nextInt();
         scanner.nextLine();  // Consume newline left-over
@@ -34,43 +35,47 @@ public class Main {
         while(custInput <= 3) {     //execute the code if this is true
 
             switch (custInput) {
+
                 case 1:  // reserve car
-                    System.out.println("Enter car make to reserve");
+                    //System.out.println("Cars Available: " + carDealerWendy.getCurrentCarsAvailable().toString());
+                    carDealerWendy.displayInventory();
+                    System.out.println("Enter car make to RESERVE");
                     carMake = scanner.nextLine();
-//                  carDealerWendy.reserveCar(carMake);
-                    System.out.println("RESERVED: " + carDealerWendy.reserveCar(carMake));
-                    System.out.println("Reserved List: " + carDealerWendy.getCurrentCarsBooked());
-                    System.out.println("Available List: " + carDealerWendy.getCurrentCarsAvailable().toString());
+
+                    //  *** add error handling method to check if carMake is available before you can reserve it.
+
+
+                    System.out.println("\r\n ====== A " + carDealerWendy.reserveCar(carMake) + " is now reserved for you. ======== \r\n");
                     break;
 
+
                 case 2:  // return car
-                    System.out.println("Enter car make to return");
+                    //System.out.println("Cars Reserved: " + carDealerWendy.getCurrentCarsBooked());
+                    carDealerWendy.displayInventoryReserved();
+                    System.out.println("Enter car make to RETURN");
                     carMake = scanner.nextLine();
-                    System.out.println("RETURNED: " + carDealerWendy.returnCar(carMake));
-                    System.out.println("Reserved List: " + carDealerWendy.getCurrentCarsBooked());
-                    System.out.println("Available List: " + carDealerWendy.getCurrentCarsAvailable().toString());
+
+                    //  *** add error handling method to check if carMake is reserved before you can return it.
+
+                    System.out.println("\r\n ====== A " + carDealerWendy.returnCar(carMake) + " has been returned by you. ======== \r\n");
                     break;
+
 
                 case 3:
                     System.out.println("Exiting Car Dealer Wendy Application.  Bye-bye.");
                     break;
+
+
             }
 
             if (custInput == 3) {   // exit the application
                 break;
             } else {    // prompt customer
-                System.out.println("Enter (1) to book a car, (2) to return a car, or (3) to exit the dealership");
+                System.out.println("Enter: \n (1) to book a car \n (2) to return a car \n (3) to exit the dealership");
                 custInput = scanner.nextInt();
                 scanner.nextLine();  // Consume newline left-over
             }
         }
 
-
-
-//        String carToBook = scanner.nextLine();
-//        carDealerWendy.bookCar(carToBook);
-//        System.out.println("You reserved: " + carDealerWendy.bookCar(carToBook));
-//        System.out.println("booked " + carDealerWendy.getCurrentCarsBooked());
-//        System.out.println("available " + carDealerWendy.getCurrentCarsAvailable().toString());
     }
 }

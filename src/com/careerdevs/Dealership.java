@@ -1,5 +1,6 @@
 package com.careerdevs;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Dealership {
@@ -16,7 +17,6 @@ public class Dealership {
         this.currentCarsAvailable = new ArrayList<>();
         this.currentCarsBooked = new ArrayList<>();
     }
-
 
     // getters and setters for dealership properties
     public String getDealershipName() {
@@ -43,13 +43,21 @@ public class Dealership {
         this.currentCarsBooked = currentCarsBooked;
     }
 
+    public void displayInventoryReserved() {  // method print out car inventory reserved to console
+        System.out.println("Reserved cars:");
+        for (int i = 0; i < currentCarsBooked.size(); i++) {
+            System.out.println(currentCarsBooked.get(i).toString());
+        }
+    }
+
     public void displayInventory() {  // method print out car inventory to console
+        System.out.println("Available cars:");
         for (int i = 0; i < currentCarsAvailable.size(); i++) {
                 System.out.println(currentCarsAvailable.get(i).toString());
         }
     }
 
-    public String reserveCar(String carMake){
+    public String reserveCar(String carMake) {
         for (int i = 0; i < currentCarsAvailable.size(); i++) {
             if(currentCarsAvailable.get(i).getMake().equals(carMake)) {
                 currentCarsBooked.add(currentCarsAvailable.get(i));

@@ -53,8 +53,10 @@ public class Car {
     // this will return a string version
     @Override
     public String toString() {
-        return this.make + " " + this.model +
-                " " + this.mileage + " miles " +
-                this.gasTankPercent + "% fuel";
+        return this.make;
+//                + " MODEL: " + this.model +
+//                " MILEAGE: " + this.mileage +
+//                " FUEL: " + this.gasTankPercent + "%";
+
     }
 }
