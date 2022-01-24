@@ -22,7 +22,7 @@ public class Main {
         carDealerWendy.getCurrentCarsAvailable().add(car3);
 
         // call the displayInventory method
-        //carDealerWendy.displayInventory();
+        carDealerWendy.displayInventory();
 
         System.out.println("\r\n ====== Welcome to Car Dealer Wendy ======== \r\n");
         System.out.println("Enter: \n (1) to book a car \n (2) to return a car \n (3) to exit the dealership");
@@ -31,33 +31,44 @@ public class Main {
         int custInput = scanner.nextInt();
         scanner.nextLine();  // Consume newline left-over
 
-        String carMake;
-        while(custInput <= 3) {     //execute the code if this is true
+        String custCarMakeToReserve;
+        String custCarMakeToReturn;
+        while(custInput <= 3 && custInput > 0) {     //execute the code if this is true
 
             switch (custInput) {
 
                 case 1:  // reserve car
-                    //System.out.println("Cars Available: " + carDealerWendy.getCurrentCarsAvailable().toString());
-                    carDealerWendy.displayInventory();
-                    System.out.println("Enter car make to RESERVE");
-                    carMake = scanner.nextLine();
 
-                    //  *** add error handling method to check if carMake is available before you can reserve it.
+                    if (carDealerWendy.displayInventory()) {  // if inventory exists
+                        System.out.println("Enter car make to RESERVE");
+                        custCarMakeToReserve = scanner.nextLine();
 
-
-                    System.out.println("\r\n ====== A " + carDealerWendy.reserveCar(carMake) + " is now reserved for you. ======== \r\n");
+                        // *** check if carMake is available.
+                        if (carDealerWendy.reserveCar(custCarMakeToReserve)) {
+                            // *** reserve the car
+                            System.out.println("\r\n ====== A " + custCarMakeToReserve + " is now reserved for you. ======== \r\n");
+                        } else {
+                            System.out.println(custCarMakeToReserve + " is not available at this time.\r");
+                        }
+                    }
                     break;
 
 
                 case 2:  // return car
+
                     //System.out.println("Cars Reserved: " + carDealerWendy.getCurrentCarsBooked());
-                    carDealerWendy.displayInventoryReserved();
-                    System.out.println("Enter car make to RETURN");
-                    carMake = scanner.nextLine();
+                    if (carDealerWendy.displayInventoryReserved()) {  // if reserved inventory exists
+                        System.out.println("Enter car make to RETURN");
+                        custCarMakeToReturn = scanner.nextLine();
 
-                    //  *** add error handling method to check if carMake is reserved before you can return it.
-
-                    System.out.println("\r\n ====== A " + carDealerWendy.returnCar(carMake) + " has been returned by you. ======== \r\n");
+                        // ** check if carMake is in the reserved list of cars.
+                        if (carDealerWendy.returnCar(custCarMakeToReturn)) {
+                            // *** return the car
+                            System.out.println("\r\n ====== A " + custCarMakeToReturn + " has been returned by you. ======== \r\n");
+                        } else {
+                            System.out.println(custCarMakeToReturn = " is not in our records. \r");
+                        }
+                    }
                     break;
 
 

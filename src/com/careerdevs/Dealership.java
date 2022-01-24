@@ -43,37 +43,59 @@ public class Dealership {
         this.currentCarsBooked = currentCarsBooked;
     }
 
-    public void displayInventoryReserved() {  // method print out car inventory reserved to console
+    public boolean displayInventoryReserved() {  // method print out car inventory reserved to console
         System.out.println("Reserved cars:");
-        for (int i = 0; i < currentCarsBooked.size(); i++) {
-            System.out.println(currentCarsBooked.get(i).toString());
+        if (currentCarsBooked.size() == 0) {
+            System.out.println("No reserved cars to return at this time");
+            return false;
+        } else {
+
+            for (int i = 0; i < currentCarsBooked.size(); i++) {
+                System.out.println(currentCarsBooked.get(i).toString());
+            }
+            return true;
         }
     }
 
-    public void displayInventory() {  // method print out car inventory to console
+    public boolean displayInventory() {  // method print out car inventory to console
         System.out.println("Available cars:");
-        for (int i = 0; i < currentCarsAvailable.size(); i++) {
+        if (currentCarsAvailable.size() == 0){
+            System.out.println("No available cars to reserve at this time.");
+            return false;
+        } else {
+            for (int i = 0; i < currentCarsAvailable.size(); i++) {
                 System.out.println(currentCarsAvailable.get(i).toString());
+            }
+            return true;
         }
     }
 
-    public String reserveCar(String carMake) {
+
+    public boolean reserveCar(String carMake) {
+        boolean confirmReservation = false;
         for (int i = 0; i < currentCarsAvailable.size(); i++) {
+
             if(currentCarsAvailable.get(i).getMake().equals(carMake)) {
                 currentCarsBooked.add(currentCarsAvailable.get(i));
                 currentCarsAvailable.remove(i);
+                confirmReservation = true;
             }
         }
-        return carMake;
+        return confirmReservation;
     }
 
-    public String returnCar(String carMake) {
+
+
+    public boolean returnCar(String carMake) {
+        boolean confirmReturn = false;
         for (int i = 0; i < currentCarsBooked.size(); i++) {
+
             if(currentCarsBooked.get(i).getMake().equals(carMake)) {
                 currentCarsAvailable.add(currentCarsBooked.get(i));
                 currentCarsBooked.remove(i);
+                confirmReturn = true;
             }
         }
-        return carMake;
+        return confirmReturn;
     }
 }
