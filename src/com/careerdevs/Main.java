@@ -1,5 +1,6 @@
 package com.careerdevs;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -25,16 +26,23 @@ public class Main {
         carDealerWendy.displayInventory();
 
         System.out.println("\r\n ====== Welcome to Car Dealer Wendy ======== \r\n");
-        System.out.println("Enter: \n (1) to book a car \n (2) to return a car \n (3) to exit the dealership");
+        System.out.println("Enter: \n (1) to reserve a car \n (2) to return a car \n (3) to exit the dealership");
+
+        int custInput = 0;
+        if (!scanner.hasNextInt() ) {
+            System.out.println("Invalid entry.  Please try again or exit the program.");
+            //scanner.nextLine();  // Consume newline left-over
+        }
 
 
-        int custInput = scanner.nextInt();
+        custInput = scanner.nextInt();
         scanner.nextLine();  // Consume newline left-over
 
         String custCarMakeToReserve;
         String custCarMakeToReturn;
-        while(custInput <= 3 && custInput > 0) {     //execute the code if this is true
 
+//        while(custInput <= 3 && custInput > 0) {     //execute the code if this is true
+        while(true) {
             switch (custInput) {
 
                 case 1:  // reserve car
@@ -47,10 +55,14 @@ public class Main {
                         if (carDealerWendy.reserveCar(custCarMakeToReserve)) {
                             // *** reserve the car
                             System.out.println("\r\n ====== A " + custCarMakeToReserve + " is now reserved for you. ======== \r\n");
+
                         } else {
                             System.out.println(custCarMakeToReserve + " is not available at this time.\r");
+
                         }
                     }
+
+                    System.out.println("Would you like to reserve another car?");
                     break;
 
 
@@ -68,6 +80,7 @@ public class Main {
                         } else {
                             System.out.println(custCarMakeToReturn = " is not in our records. \r");
                         }
+                        System.out.println("Would you like to return another car?");
                     }
                     break;
 
@@ -76,13 +89,16 @@ public class Main {
                     System.out.println("Exiting Car Dealer Wendy Application.  Bye-bye.");
                     break;
 
-
+                default:
+                    System.out.println("Invalid entry.  Please try again or exit the program.");
+                    System.out.println("Enter: \n (1) to reserve a car \n (2) to return a car \n (3) to exit the dealership");
+                    break;
             }
 
             if (custInput == 3) {   // exit the application
                 break;
             } else {    // prompt customer
-                System.out.println("Enter: \n (1) to book a car \n (2) to return a car \n (3) to exit the dealership");
+                System.out.println("Enter: \n (1) to reserve a car \n (2) to return a car \n (3) to exit the dealership");
                 custInput = scanner.nextInt();
                 scanner.nextLine();  // Consume newline left-over
             }

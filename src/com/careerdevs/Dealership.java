@@ -60,7 +60,7 @@ public class Dealership {
     public boolean displayInventory() {  // method print out car inventory to console
         System.out.println("Available cars:");
         if (currentCarsAvailable.size() == 0){
-            System.out.println("No available cars to reserve at this time.");
+//            System.out.println("No available cars to reserve at this time.");
             return false;
         } else {
             for (int i = 0; i < currentCarsAvailable.size(); i++) {
